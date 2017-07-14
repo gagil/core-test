@@ -27,10 +27,15 @@
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
 			</props>
 		</property>
 		<property name="packagesToScan" value="org.gagl.core.modelo"></property>
+		<property name="mappingResources">
+			<list>
+				<value>META-INF/hibernate.queries.xml</value>
+			</list>
+		</property>	
 	</bean>
 
 	<!-- Transaction manager -->
@@ -38,8 +43,8 @@
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
+
 	<!-- Esto hace que se ejecuten las transacciones (commits) -->
-	<tx:annotation-driven transaction-manager="transactionManager" />	
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
 </beans>
