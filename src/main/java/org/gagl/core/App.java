@@ -18,17 +18,17 @@ public class App {
 
 		App objeto = new App();
 
-		
-
-		//objeto.insertaPersona(ds);
+		// objeto.insertaPersona(ds);
 		// objeto.actualizaPersona(ds);
-		objeto.obtenerPersonas(ds);
+		/*objeto.obtenerPersonas(ds);
 		objeto.obtenerPersonasPorParametro(ds);
 		objeto.obtenerPersonasPorParametroAndQueryName(ds);
 		objeto.obtenerPersonasPorParametroAndClase(ds);
 		objeto.obtenerPersonasPorParametroAndQueryName(ds);
 		objeto.obtenerPersonasPorParametroAndClase(ds);
 		objeto.obtenerPersonasPorParametroAndClasePorSqlQuery(ds);
+		*/
+		objeto.obtenerUnaPersona(ds);
 
 	}
 
@@ -70,7 +70,7 @@ public class App {
 	public void obtenerPersonas(GeneralService ds) {
 		try {
 			List<Persona> lista = ds.obtenerPersonas();
-			
+
 			for (Persona fila : lista) {
 
 				System.out.println("Id--------:" + fila.getId());
@@ -152,6 +152,21 @@ public class App {
 				System.out.println("Nombre----:" + fila.getNombre());
 				System.out.println("Direccion-:" + fila.getDireccion());
 			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void obtenerUnaPersona(GeneralService ds) {
+		try {
+			Persona persona = ds.obtenerUnaPersona();
+			System.out.println("Obtube una persona");
+
+			System.out.println("Id--------:" + persona.getId());
+			System.out.println("Nombre----:" + persona.getNombre());
+			System.out.println("Direccion-:" + persona.getDireccion());
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

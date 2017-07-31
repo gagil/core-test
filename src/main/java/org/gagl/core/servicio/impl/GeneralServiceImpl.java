@@ -9,6 +9,8 @@ import org.gagl.core.modelo.Persona;
 import org.gagl.core.servicio.GeneralService;
 import org.gagl.fwk.dao.Dao;
 import org.gagl.fwk.dao.DaoFinder;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -86,5 +88,19 @@ public class GeneralServiceImpl implements GeneralService {
 		List<Persona> listaEntidad=this.daoFinder.findBySqlQuery(sql, pParams,Persona.class);		
 		
 		return listaEntidad;
-	}	
+	}
+	
+	@Transactional(readOnly=true)
+	@Override
+	public Persona obtenerUnaPersona() throws Exception{
+		
+		DetachedCriteria pCriteria= DetachedCriteria.forClass(Persona.class);
+		pCriteria.add(Restrictions.eq("nombre", "jose"));
+		
+		Persona persona=new Persona();
+		
+		persona=(Persona) this.daoFinder.uniqueResult(this.daoFinder.findByDetachedCriteria(pCriteria));
+				
+		return persona;
+	}
 }
